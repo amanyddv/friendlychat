@@ -15,19 +15,26 @@
         <button (click)="this.chatService.logout()">logout</button>
     </div>
     <div class="chat_section">
-            <div *ngFor="let message of (messages$ | async)?.reverse() as messages;" class="message_detail">
+        <div *ngFor="let message of (messages$ | async)?.reverse() as messages;" class="message_detail">
 
             <div class="message_user_detail"><img [src]="message['profilePicUrl']" class="profile_image" alt="">
                 <p>{{message['name']}}:</p>
             </div>
-            <p class="message">{{message['text']}} </p>
+            <div class="message">
+                <div *ngIf="message['text'] && message['text'].length > 0">
+                    {{message['text']}}
+                </div>
+                <div *ngIf="message['imageUrl'] && message['imageUrl'].length > 0">
+                    <img  [src]="message['imageUrl']" alt="image" class="image"/>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 <div class="message_box">
     <div>
         <input type="file" class=" hidden" (change)="this.uploadImage($event)" #fileUpload>
-        <button (click)="fileUpload.click()" >+</button>
+        <button (click)="fileUpload.click()">+</button>
         <input type="text" [(ngModel)]="text" placeholder="write your message">
         <button (click)="sendTextMessage()">>></button>
     </div>
