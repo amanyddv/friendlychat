@@ -118,7 +118,7 @@ nav>div{
     margin-left: 20px;
     background-color: rgb(255, 195, 83);
     border-radius: 20px;
-    width: 30%;
+    max-width: 30%;
     padding: 10px 10px;
     margin-bottom:15px ;
 }
@@ -126,4 +126,18 @@ nav>div{
 .hidden{
     display: none;
 
+}
+.message .image{
+    width:100px;
+}
+
+@media screen and (max-width:600px) {
+    .message{
+        margin-left: 20px;
+        background-color: rgb(255, 195, 83);
+        border-radius: 20px;
+        min-width: fit-content;
+        padding: 10px 10px;
+        margin-bottom:15px ;
+    }
 }

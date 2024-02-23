@@ -47,16 +47,21 @@ export class ChatComponent {
 
 
     text = '';
+    imgFile:any
     sendTextMessage() {
       this.chatService.saveTextMessage(this.text);
       this.text = '';
+      if(this.imgFile){
+      this.chatService.saveImageMessage(this.imgFile);
+      }
+      else{ return
+      }
     }
 
     uploadImage(event: any) {
-      const imgFile: File = event.target.files[0];
-      if (!imgFile) {
+      this.imgFile= event.target.files[0];
+      if (!this.imgFile) {
         return;
       }
-      // this.chatService.saveImageMessage(imgFile);
     }
 }
