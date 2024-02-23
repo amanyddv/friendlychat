@@ -1,26 +1,34 @@
 <nav>
     <div><img src="assets/logo.jpeg" class="chat_app_logo" alt="chat app logo">
-        <p>   Friendly Chat</p>
+        <p> Friendly Chat</p>
     </div>
-    <div class="menu"><img src="assets/{{user.profile}}" class="profile_image" alt="profile image">
-        <p>{{user.name}}</p><button class="more_button" (click)="toggleDiv()"><img src="assets/more.png" class="more_icon" alt=""></button>
+    <div class="menu"><img src="{{user.profile}}" class="profile_image" alt="profile image">
+        <p> {{user.name}}
+        </p><button class="more_button" (click)="toggleDiv()"><img src="assets/more.png" class="more_icon"
+                alt=""></button>
     </div>
 </nav>
 <section>
-    <div *ngIf="isVisible" class="logout" ><p>{{user.name}}</p>
-        <button>logout</button>
+    <div *ngIf="isVisible" class="logout">
+        <p> {{user.name}}
+        </p>
+        <button (click)="this.chatService.logout()">logout</button>
     </div>
     <div class="chat_section">
-        <div class="message_detail">
-            <div class="message_user_detail"><img src="assets/{{user.profile}}" class="profile_image" alt=""> <p>{{user.name}}:</p></div>
-            <p class="message">hey</p>
+            <div *ngFor="let message of (messages$ | async)?.reverse() as messages;" class="message_detail">
+
+            <div class="message_user_detail"><img [src]="message['profilePicUrl']" class="profile_image" alt="">
+                <p>{{message['name']}}:</p>
+            </div>
+            <p class="message">{{message['text']}} </p>
         </div>
     </div>
 </section>
 <div class="message_box">
     <div>
-        <button>+</button>
-        <input type="text" placeholder="write your message">
-        <button>>></button>
+        <input type="file" class=" hidden" (change)="this.uploadImage($event)" #fileUpload>
+        <button (click)="fileUpload.click()" >+</button>
+        <input type="text" [(ngModel)]="text" placeholder="write your message">
+        <button (click)="sendTextMessage()">>></button>
     </div>
 </div>
