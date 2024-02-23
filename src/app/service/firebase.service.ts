@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { Auth, signOut, user } from '@angular/fire/auth';
+import { Storage } from '@angular/fire/storage';
 
 
 
@@ -14,6 +15,8 @@ import { Auth, signOut, user } from '@angular/fire/auth';
 export class FirebaseService {
   firestore = inject(Firestore);
   auth:Auth= inject(Auth);
+  private storage: Storage = inject(Storage);
+
   
   user$ = user(this.auth);
 
@@ -90,9 +93,7 @@ saveTextMessage = async (messageText: string) => {
 };
 
 loadMessages = () => {
-  // Create the query to load the last 12 messages and listen for new ones.
   const recentMessagesQuery = query(collection(this.firestore, 'messages'), orderBy('timestamp', 'desc'), limit(12));
-  // Start listening to the query.
   return collectionData(recentMessagesQuery);
 }
 
