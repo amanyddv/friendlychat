@@ -30,7 +30,7 @@ section{
 .chat_section{
     padding-top:60px ;
     width: 80%;
-    min-height: 900vh;
+    min-height: 100vh;
     background-color: rgb(255, 255, 255);
 }
 
@@ -108,7 +108,7 @@ nav>div{
     align-items: end;
     gap:5px;
     color: rgb(188, 188, 188);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
 }
 
@@ -118,4 +118,10 @@ nav>div{
     border-radius: 20px;
     width: 30%;
     padding: 10px 10px;
+    margin-bottom:15px ;
+}
+
+.hidden{
+    display: none;
+
 }

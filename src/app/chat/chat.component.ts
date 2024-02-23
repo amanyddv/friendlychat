@@ -1,11 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../service/firebase.service';
+import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { DocumentData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css',
   providers:[FirebaseService],
@@ -16,9 +19,12 @@ export class ChatComponent {
   chatService = inject(FirebaseService);
 
   user: { name: any, profile: string } ={
-    name: "Jane Doe",
-    profile:"profile.png"
+    name: "User Name",
+    profile:"assets/profile.png"
   }
+
+  messages$ = this.chatService.loadMessages() as Observable<DocumentData[]>;
+
 
   
   isVisible = false;
@@ -28,12 +34,29 @@ export class ChatComponent {
 
   userName:any|undefined
   ngOnInit():void{
-    this.chatService.user$.subscribe((user: any | null) => {
-      if (user) {
-        this.userName = user.displayName;
-      } else {
-        this.userName = 'Guest';
-      }
-    });  }
+    this.chatService.user$.subscribe((userData: any | null) => {
+      if (userData) {
+        this.user.name = userData.displayName;
+        this.user.profile=userData?.photoURL;
+        console.log(userData.photoURL)
+      } 
+    });  
+    console.log(this.messages$)
   
+  }
+
+
+    text = '';
+    sendTextMessage() {
+      this.chatService.saveTextMessage(this.text);
+      this.text = '';
+    }
+
+    uploadImage(event: any) {
+      const imgFile: File = event.target.files[0];
+      if (!imgFile) {
+        return;
+      }
+      // this.chatService.saveImageMessage(imgFile);
+    }
 }
