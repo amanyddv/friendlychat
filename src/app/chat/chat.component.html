@@ -1,18 +1,24 @@
 <nav>
     <div><img src="assets/logo.jpeg" class="chat_app_logo" alt="chat app logo">
-        <p>   Friendly Chat</p>
+        <p> Friendly Chat</p>
     </div>
     <div class="menu"><img src="assets/{{user.profile}}" class="profile_image" alt="profile image">
-        <p>{{user.name}}</p><button class="more_button" (click)="toggleDiv()"><img src="assets/more.png" class="more_icon" alt=""></button>
+        <p> {{userName}}
+        </p><button class="more_button" (click)="toggleDiv()"><img src="assets/more.png" class="more_icon"
+                alt=""></button>
     </div>
 </nav>
 <section>
-    <div *ngIf="isVisible" class="logout" ><p>{{user.name}}</p>
+    <div *ngIf="isVisible" class="logout">
+        <p> {{userName}}
+        </p>
         <button>logout</button>
     </div>
     <div class="chat_section">
         <div class="message_detail">
-            <div class="message_user_detail"><img src="assets/{{user.profile}}" class="profile_image" alt=""> <p>{{user.name}}:</p></div>
+            <div class="message_user_detail"><img src="assets/{{user.profile}}" class="profile_image" alt="">
+                <p>{{userName}}:</p>
+            </div>
             <p class="message">hey</p>
         </div>
     </div>
