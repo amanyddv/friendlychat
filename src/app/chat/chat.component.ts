@@ -38,11 +38,14 @@ export class ChatComponent {
       if (userData) {
         this.user.name = userData.displayName;
         this.user.profile=userData?.photoURL;
-        console.log(userData.photoURL)
+        this.chatService.requestNotificationsPermissions();
       } 
     });  
-    console.log(this.messages$)
   
+  }
+
+  ngAfterViewChecked(){
+
   }
 
 

@@ -13,7 +13,6 @@ export class LoginComponent {
   chatService = inject(FirebaseService);
   
   ngOnInit():void{
-    console.log("work")
   }
 
 }

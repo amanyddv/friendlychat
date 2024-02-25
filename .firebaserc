@@ -1,4 +1,7 @@
 {
+  "projects": {
+    "default": "friendlychat-cdc5f"
+  },
   "targets": {
     "friendlychat-cdc5f": {
       "hosting": {
@@ -8,7 +11,5 @@
       }
     }
   },
-  "projects": {
-    "default": "friendlychat-cdc5f"
-  }
+  "etags": {}
 }
